@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "node_modules/.bin/gulp lint",
     "dev": "node_modules/.bin/gulp",
-    "serve": "NODE_ENV=production node src/index"
+    "serve": "NODE_ENV=production node src/index",
+    "test": "echo 'No tests specified'; exit 0"
   },
   "dependencies": {
     "@base-cms/object-path": "^0.6.0",
