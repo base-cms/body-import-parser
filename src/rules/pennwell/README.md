@@ -4,7 +4,7 @@
 To access, send a `POST` request to `/pennwell/default`. This rule set performs the following operations:
 - Removes duplicative whitespace values (via `html.replace(/\s\s+/g, '')`)
 - Extracts the `deck` text from elements classed with `.paraStyle_headline_deck` and removes the element from the cleaned HTML.
-- Extracts an `author` object from elements classed with `.paraStyle_byline` or `.paraStyle_byline` and removes the elements from the cleaned HTML.
+- Extracts an `author` object from elements classed with `.paraStyle_byline` or `.paraStyle_body_bio` and removes the elements from the cleaned HTML.
 - If an `<h1>` is detected anywhere in the body, all heading elements are increased by one (e.g. `<h1>` becomes `<h2>`, `<h2>` becomes `<h3>`, etc).
 
 ### Examples
