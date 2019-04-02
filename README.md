@@ -1,4 +1,5 @@
 # Body Import Parser
+Cleans/extracts elements from content bodies. For use with content imports.
 
 ## Installation
 **Note:** _This repository requires **Docker Engine 18.06.0** or greater as Compose file format 3.7 is used._ All commands are assumed to be ran from the project root.
