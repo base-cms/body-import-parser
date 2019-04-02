@@ -6,6 +6,11 @@
   "author": "Jacob Bare <jacob@limit0.io>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "lint": "node_modules/.bin/gulp lint",
+    "dev": "node_modules/.bin/gulp",
+    "serve": "NODE_ENV=production node src/index"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4"
