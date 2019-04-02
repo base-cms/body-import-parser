@@ -51,7 +51,9 @@ module.exports = async (body) => {
       deck,
       author,
     },
-    cleaned: $('body').html(),
-    original: body,
+    html: {
+      cleaned: $('body').html(),
+      original: body,
+    },
   };
 };
