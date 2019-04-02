@@ -18,6 +18,19 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@base-cms/object-path@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@base-cms/object-path/-/object-path-0.6.0.tgz#c5e622b5337e8466bf804dd389753bc5d112aa8c"
+  integrity sha512-GrXgutfZG+1SLSdcZeDT4KFVMBc7f3/5NuEpeH9Gv4JRkay86gWJn3xtQYFfXUaXBwXUzcAotPbcDprjA9K19g==
+  dependencies:
+    "@base-cms/utils" "^0.6.0"
+    object-path "^0.11.4"
+
+"@base-cms/utils@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@base-cms/utils/-/utils-0.6.0.tgz#4797b962576902223ffb1dc5fee7b24801cf9088"
+  integrity sha512-bqBMnvhADjZ6pTNRuzX1pnISuHbdB0oG85It1a3MrG2SQ4DL/AWzdBpkbBgffr8Aspshk/a589BPNKnM2xTdhw==
+
 "@types/node@*":
   version "11.13.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.0.tgz#b0df8d6ef9b5001b2be3a94d909ce3c29a80f9e1"
@@ -2361,6 +2374,11 @@ object-keys@^1.0.11, object-keys@^1.0.12:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.0.tgz#11bd22348dd2e096a045ab06f6c85bcc340fa032"
   integrity sha512-6OO5X1+2tYkNyNEx6TsCxEqFfRWaqx6EtMiSbGrw8Ob8v9Ne+Hl8rBAgLBZn5wjEz3s/s6U1WXFUFOcxxAwUpg==
+
+object-path@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.4.tgz#370ae752fbf37de3ea70a861c23bba8915691949"
+  integrity sha1-NwrnUvvzfePqcKhhwju6iRVpGUk=
 
 object-visit@^1.0.0:
   version "1.0.1"

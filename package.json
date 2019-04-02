@@ -12,6 +12,8 @@
     "serve": "NODE_ENV=production node src/index"
   },
   "dependencies": {
+    "@base-cms/object-path": "^0.6.0",
+    "@base-cms/utils": "^0.6.0",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4"
   },
