@@ -3,19 +3,16 @@
  * Deployment tool for project
  * Requirements:
  * - ENV
- *   - DOCKERHUB_USERNAME
- *   - DOCKERHUB_PASSWORD
+ *   - DOCKER_USERNAME
+ *   - DOCKER_PASSWORD
  *   - TRAVIS_TAG
  *   - RANCHER_URL
  *   - RANCHER_TOKEN
  *   - RANCHER_CLUSTERID
  */
 
-const { existsSync } = require('fs');
-const { join } = require('path');
 const { spawnSync } = require('child_process');
 const https = require('https');
-const lerna = require('../lerna.json');
 
 const { log } = console;
 const { TRAVIS_TAG: version } = process.env;
@@ -77,13 +74,13 @@ const shouldBuild = async () => {
  */
 const build = async () => {
   log(`Building  ${image}:${version}...\n`);
-  const { status } = await spawnSync('bash', ['scripts/deploy-image.sh', site, version], { stdio: 'inherit' });
+  const { status } = await spawnSync('bash', ['scripts/deploy-image.sh', version], { stdio: 'inherit' });
   if (status !== 0) error('Image build failed!');
 }
 
 const deploy = async () => {
   log(`Deploying ${image}:${version} on Kubernertes`);
-  const { status } = await spawnSync('bash', ['scripts/deploy-k8s.sh', site, version], { stdio: 'inherit' });
+  const { status } = await spawnSync('bash', ['scripts/deploy-k8s.sh', version], { stdio: 'inherit' });
   if (status !== 0) error('Image deploy failed!');
 };
 

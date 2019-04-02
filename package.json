@@ -1,6 +1,6 @@
 {
   "name": "@base-cms/body-import-parser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src/index.js",
   "repository": "https://github.com/base-cms/body-import-parser.git",
   "author": "Jacob Bare <jacob@limit0.io>",
