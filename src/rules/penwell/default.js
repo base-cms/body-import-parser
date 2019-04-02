@@ -11,11 +11,29 @@ const extractDeck = ($) => {
 };
 
 const extractAuthor = ($) => {
-  const byline = ($('.paraStyle_byline').text() || '').trim();
-  $('.paraStyle_byline').replaceWith('');
+  const bylineClass = '.paraStyle_byline';
+  const bioClass = '.paraStyle_body_bio';
 
+  const name = ($(bylineClass).text() || '').trim().replace(/^by/i, '').trim();
+
+  let image = null;
+  let bio = '';
+
+  $(bioClass).each(function () {
+    const imgElement = $(this).children('img');
+    if (imgElement.length) {
+      image = imgElement.attr('src');
+    } else {
+      bio = `${bio}<p>${$(this).html()}</p>`;
+    }
+  });
+
+  $(bylineClass).replaceWith('');
+  $(bioClass).replaceWith('');
   return {
-    name: byline.replace(/^by/i, '').trim() || null,
+    name: name || null,
+    image: image || null,
+    bio: bio || null,
   };
 };
 
