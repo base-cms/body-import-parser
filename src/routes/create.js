@@ -1,7 +1,6 @@
 const { asyncRoute } = require('@base-cms/utils');
 
 const paths = [];
-exports.paths = paths;
 
 const createRoute = (app, path, fn) => {
   paths.push(path);
@@ -19,7 +18,7 @@ const createRoute = (app, path, fn) => {
         return { ...o, [k]: v };
       }, {});
     const results = await fn(body, options);
-    return res.json(results);
+    res.json(results);
   }));
 };
 
