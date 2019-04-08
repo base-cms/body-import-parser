@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const adjustHeadings = require('../../utils/adjust-headings');
+const removeElements = require('../../utils/remove-elements');
 
 const extractDeck = ($) => {
   const className = '.paraStyle_headline_deck';
@@ -45,6 +46,12 @@ module.exports = async (body) => {
   const author = extractAuthor($);
 
   adjustHeadings($);
+
+  // Remove form elements.
+  removeElements($, 'form');
+
+  // Remove buyer's guide iframe search embeds.
+  removeElements($, 'iframe[src*="pennnet.com"]');
 
   return {
     extracted: {
