@@ -52,10 +52,11 @@ describe('rules/pennwell/default', () => {
       <div>
         <p>X > Y</p>
         <p>&amp;</p>
+        %{[ data-embed-type="image" data-embed-id="5c9cebaedad15fb329dd7489" data-embed-element="span" data-embed-size="320w" contenteditable="false" data-embed-align="center" ]}%
       </div>
     `;
     const result = await rule(body);
-    expect(result.html.cleaned).to.equal('<div><p>X > Y</p><p>&</p></div>');
+    expect(result.html.cleaned).to.equal('<div><p>X > Y</p><p>&</p>%{[ data-embed-type="image" data-embed-id="5c9cebaedad15fb329dd7489" data-embed-element="span" data-embed-size="320w" contenteditable="false" data-embed-align="center" ]}%</div>');
   });
   it('should adjust heading elements when an <h1> is present.');
   it('should not adjust heading elements when an <h1> is not present.');
