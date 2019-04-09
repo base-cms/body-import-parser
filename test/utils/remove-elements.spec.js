@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-const removeElements = require('../../../src/utils/remove-elements');
+const removeElements = require('../../src/utils/remove-elements');
 
 describe('utils/remove-elements', () => {
   it('should remove elements from the HTML.', async () => {

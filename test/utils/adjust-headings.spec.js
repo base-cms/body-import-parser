@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-const adjustHeadings = require('../../../src/utils/adjust-headings');
+const adjustHeadings = require('../../src/utils/adjust-headings');
 
 describe('utils/adjust-headings', () => {
   it('should adjust heading elements when an <h1> is present.', async () => {

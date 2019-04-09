@@ -1,4 +1,4 @@
-const stripWhitespace = require('../../../src/utils/strip-whitespace');
+const stripWhitespace = require('../../src/utils/strip-whitespace');
 
 describe('utils/strip-whitespace', () => {
   it('should strip new lines and excessive whitespace around HMTL elements.', async () => {

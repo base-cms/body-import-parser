@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-const removeAttributes = require('../../../src/utils/remove-attributes');
+const removeAttributes = require('../../src/utils/remove-attributes');
 
 describe('utils/remove-attributes', () => {
   it('should remove the requested attributes.', async () => {
