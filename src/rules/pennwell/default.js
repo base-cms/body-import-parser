@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 const adjustHeadings = require('../../utils/adjust-headings');
 const removeElements = require('../../utils/remove-elements');
+const stripWhitespace = require('../../utils/strip-whitespace');
 
 const extractDeck = ($) => {
   const className = '.paraStyle_headline_deck';
@@ -39,10 +40,7 @@ const extractAuthor = ($) => {
 };
 
 module.exports = async (body) => {
-  const html = (body || '')
-    .replace(/[\r\n\f\v\t\b\\]/g, '')
-    .trim()
-    .replace(/>\s+</g, '><');
+  const html = stripWhitespace(body);
   const $ = cheerio.load(html, { decodeEntities: false });
 
   const deck = extractDeck($);
