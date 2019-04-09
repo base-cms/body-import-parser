@@ -10,7 +10,8 @@
     "lint": "node_modules/.bin/gulp lint",
     "dev": "node_modules/.bin/gulp",
     "serve": "NODE_ENV=production node src/index",
-    "test": "node_modules/.bin/gulp lint && node_modules/.bin/mocha"
+    "test": "node_modules/.bin/gulp lint && node_modules/.bin/mocha",
+    "coverage": "./node_modules/.bin/nyc yarn run test"
   },
   "dependencies": {
     "@base-cms/object-path": "^0.6.0",
@@ -32,5 +33,17 @@
     "nyc": "^13.3.0",
     "sinon": "^7.3.1",
     "supertest": "^4.0.2"
+  },
+  "nyc": {
+    "check-coverage": false,
+    "per-file": true,
+    "reporter": [
+      "text"
+    ],
+    "all": true,
+    "cache": false,
+    "include": [
+      "src/**/*.js"
+    ]
   }
 }
