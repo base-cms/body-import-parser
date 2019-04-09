@@ -9,7 +9,7 @@ const extractDeck = ($) => {
   const className = '.paraStyle_headline_deck';
   const element = $(className);
   if (!element.length) return null;
-  const deck = (element.text() || '').trim() || null;
+  const deck = (element.text() || '').replace(/\s+/g, ' ').trim() || null;
   element.replaceWith('');
   return deck;
 };
