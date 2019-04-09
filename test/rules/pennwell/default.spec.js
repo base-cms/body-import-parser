@@ -21,7 +21,7 @@ describe('rules/pennwell/default', () => {
       <p>Hello, World</p>\t
     `;
     const result = await rule(body);
-    expect(result.html.cleaned).to.equal('<div><span>Bar   </span><span>Foo  Bar</span><span>Baz Bar</span></div><p>Hello, World</p>');
+    expect(result.html.cleaned).to.equal('<div><span>Bar</span><span>Foo Bar</span><span>Baz Bar</span></div><p>Hello, World</p>');
   });
   it('should remove <form> elements.', async () => {
     const body = `
@@ -190,7 +190,7 @@ describe('rules/pennwell/default', () => {
       </div>
     `;
     const result = await rule(body);
-    expect(result.extracted.author.bio).to.equal('<p><strong>The Author: </strong></p><p>Jenny Shiner is the communications manager for GPS Insight. She graduated from Arizona State University with a bachelor’s degree in communication and is responsible for communication for all business segments that GPS Insight targets. For more information on telematics and fuel card technologies, visit www.gpsinsight.com.</p>');
+    expect(result.extracted.author.bio).to.equal('<p><strong>The Author:</strong></p><p>Jenny Shiner is the communications manager for GPS Insight. She graduated from Arizona State University with a bachelor’s degree in communication and is responsible for communication for all business segments that GPS Insight targets. For more information on telematics and fuel card technologies, visit www.gpsinsight.com.</p>');
   });
   it('should remove the author elements when present.', async () => {
     const body = `
