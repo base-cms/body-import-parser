@@ -130,8 +130,28 @@ describe('rules/pennwell/default', () => {
     const result = await rule(body);
     expect(result.html.cleaned).to.equal('<div><span>Bar</span></div>');
   });
-  it('should extract a deck value when present.');
-  it('should remove the deck elements when present.');
+  it('should extract a deck value when present.', async () => {
+    const body = `
+      <div>
+        <h4 class="paraStyle_headline_deck"> Put Drivers in
+        Safe Hands   with Telematics</h4>
+        <p>Foo</p>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.extracted.deck).to.equal('Put Drivers in Safe Hands with Telematics');
+  });
+  it('should remove the deck elements when present.', async () => {
+    const body = `
+      <div>
+        <h4 class="paraStyle_headline_deck"> Put Drivers in
+        Safe Hands   with Telematics</h4>
+        <p>Foo</p>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><p>Foo</p></div>');
+  });
   it('should extract an author value when present.');
   it('should remove the author elements when present.');
 });
