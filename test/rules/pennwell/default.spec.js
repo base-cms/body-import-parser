@@ -141,6 +141,16 @@ describe('rules/pennwell/default', () => {
     const result = await rule(body);
     expect(result.extracted.deck).to.equal('Put Drivers in Safe Hands with Telematics');
   });
+  it('should return a null deck when elements are present but are empty.', async () => {
+    const body = `
+      <div>
+        <h4 class="paraStyle_headline_deck"></h4>
+        <p>Foo</p>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.extracted.deck).to.equal(null);
+  });
   it('should remove the deck elements when present.', async () => {
     const body = `
       <div>

@@ -12,7 +12,7 @@ const removeAttrs = ($) => {
   removeDataAttributes($);
 };
 
-const loadHTML = html => cheerio.load(html || '', { decodeEntities: false });
+const loadHTML = html => cheerio.load(html, { decodeEntities: false });
 
 const cleanTextValue = v => (v || '').replace(/\s+/g, ' ').trim();
 
