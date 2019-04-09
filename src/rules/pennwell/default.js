@@ -39,7 +39,10 @@ const extractAuthor = ($) => {
 };
 
 module.exports = async (body) => {
-  const html = (body || '').replace(/\s\s+/g, '');
+  const html = (body || '')
+    .replace(/[\r\n\f\v\t\b\\]/g, '')
+    .trim()
+    .replace(/>\s+</g, '><');
   const $ = cheerio.load(html, { decodeEntities: false });
 
   const deck = extractDeck($);
