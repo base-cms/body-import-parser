@@ -10,7 +10,7 @@
     "lint": "node_modules/.bin/gulp lint",
     "dev": "node_modules/.bin/gulp",
     "serve": "NODE_ENV=production node src/index",
-    "test": "node_modules/.bin/gulp lint"
+    "test": "node_modules/.bin/gulp lint && node_modules/.bin/mocha"
   },
   "dependencies": {
     "@base-cms/object-path": "^0.6.0",
