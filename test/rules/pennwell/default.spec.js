@@ -94,10 +94,42 @@ describe('rules/pennwell/default', () => {
     const result = await rule(body);
     expect(result.html.cleaned).to.equal('<div><h2>Foo</h2><h2>Bar</h2><h2>Bar</h2><div><h3>Foo</h3><h3>Foo</h3><h4>Foo</h4><h5>Foo</h5><h6>Foo</h6></div></div>');
   });
-  it('should remove `class` attributes.');
-  it('should remove `style` attributes.');
-  it('should remove `id` attributes.');
-  it('should remove `data` attributes.');
+  it('should remove `class` attributes.', async () => {
+    const body = `
+      <div class="foo">
+        <span class="bar">Bar</span>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><span>Bar</span></div>');
+  });
+  it('should remove `style` attributes.', async () => {
+    const body = `
+      <div style="">
+        <span style="height: 10px;">Bar</span>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><span>Bar</span></div>');
+  });
+  it('should remove `id` attributes.', async () => {
+    const body = `
+      <div id="">
+        <span id="foo">Bar</span>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><span>Bar</span></div>');
+  });
+  it('should remove `data` attributes.', async () => {
+    const body = `
+      <div data-id="">
+        <span data-foo="foo">Bar</span>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><span>Bar</span></div>');
+  });
   it('should extract a deck value when present.');
   it('should remove the deck elements when present.');
   it('should extract an author value when present.');

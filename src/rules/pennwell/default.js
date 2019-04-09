@@ -2,6 +2,8 @@ const cheerio = require('cheerio');
 const adjustHeadings = require('../../utils/adjust-headings');
 const removeElements = require('../../utils/remove-elements');
 const stripWhitespace = require('../../utils/strip-whitespace');
+const removeAttributes = require('../../utils/remove-attributes');
+const removeDataAttributes = require('../../utils/remove-data-attributes');
 
 const extractDeck = ($) => {
   const className = '.paraStyle_headline_deck';
@@ -53,6 +55,12 @@ module.exports = async (body) => {
 
   // Remove buyer's guide iframe search embeds.
   removeElements($, 'iframe[src*="pennnet.com"]');
+
+  // Remove class, id, and style attributes.
+  removeAttributes($, ['class', 'id', 'style']);
+
+  // Remove all data attributes.
+  removeDataAttributes($);
 
   return {
     extracted: {
