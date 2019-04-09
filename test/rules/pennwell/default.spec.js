@@ -152,6 +152,48 @@ describe('rules/pennwell/default', () => {
     const result = await rule(body);
     expect(result.html.cleaned).to.equal('<div><p>Foo</p></div>');
   });
-  it('should extract an author value when present.');
-  it('should remove the author elements when present.');
+  it('should extract an author name when present.', async () => {
+    const body = `
+      <div>
+        <h2 class="paraStyle_byline">By Jenny
+        Shiner</h2>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.extracted.author.name).to.equal('Jenny Shiner');
+  });
+  it('should extract an author image when present.', async () => {
+    const body = `
+      <div>
+        <p class="paraStyle_body_bio"><img src="//aemstatic-ww2.azureedge.net/content/dam/up/print-articles/volume-23/issue-2/1902UPpf2-a01.jpg" alt="" width="167" height="167"></p>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.extracted.author.image).to.equal('//aemstatic-ww2.azureedge.net/content/dam/up/print-articles/volume-23/issue-2/1902UPpf2-a01.jpg');
+  });
+  it('should extract an author bio when present.', async () => {
+    const body = `
+      <div>
+        <p class="paraStyle_body_bio"><strong class="charStyle_bold">The Author: </strong></p>
+        <p class="paraStyle_body_bio"><img src="//aemstatic-ww2.azureedge.net/content/dam/up/print-articles/volume-23/issue-2/1902UPpf2-a01.jpg" alt="" width="167" height="167"></p>
+        <p class="paraStyle_body_bio">Jenny Shiner is the communications manager for GPS Insight. She graduated from Arizona State University with a bachelor’s degree in communication and is responsible for communication for all business segments that GPS Insight targets. For more information on telematics and fuel card technologies, visit www.gpsinsight.com.</p>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.extracted.author.bio).to.equal('<p><strong>The Author: </strong></p><p>Jenny Shiner is the communications manager for GPS Insight. She graduated from Arizona State University with a bachelor’s degree in communication and is responsible for communication for all business segments that GPS Insight targets. For more information on telematics and fuel card technologies, visit www.gpsinsight.com.</p>');
+  });
+  it('should remove the author elements when present.', async () => {
+    const body = `
+      <div>
+        <h2 class="paraStyle_byline">By Jenny Shiner</h2>
+        <p>Foo</p>
+        <p class="paraStyle_body_bio"><strong class="charStyle_bold">The Author: </strong></p>
+        <p class="paraStyle_body_bio"><img src="//aemstatic-ww2.azureedge.net/content/dam/up/print-articles/volume-23/issue-2/1902UPpf2-a01.jpg" alt="" width="167" height="167"></p>
+        <p class="paraStyle_body_bio">Jenny Shiner is the communications manager for GPS Insight. She graduated from Arizona State University with a bachelor’s degree in communication and is responsible for communication for all business segments that GPS Insight targets. For more information on telematics and fuel card technologies, visit www.gpsinsight.com.</p>
+        <p>Bar</p>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><p>Foo</p><p>Bar</p></div>');
+  });
 });

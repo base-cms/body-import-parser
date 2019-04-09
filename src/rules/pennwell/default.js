@@ -5,20 +5,38 @@ const stripWhitespace = require('../../utils/strip-whitespace');
 const removeAttributes = require('../../utils/remove-attributes');
 const removeDataAttributes = require('../../utils/remove-data-attributes');
 
+const removeAttrs = ($) => {
+  // Remove class, id, and style attributes.
+  removeAttributes($, ['class', 'id', 'style']);
+  // Remove all data attributes.
+  removeDataAttributes($);
+};
+
+const loadHTML = html => cheerio.load(html || '', { decodeEntities: false });
+
+const cleanTextValue = v => (v || '').replace(/\s+/g, ' ').trim();
+
 const extractDeck = ($) => {
   const className = '.paraStyle_headline_deck';
   const element = $(className);
   if (!element.length) return null;
-  const deck = (element.text() || '').replace(/\s+/g, ' ').trim() || null;
+  const deck = cleanTextValue(element.text()) || null;
   element.replaceWith('');
   return deck;
+};
+
+const cleanBio = (bio) => {
+  if (!bio) return null;
+  const $ = loadHTML(bio);
+  removeAttrs($);
+  return $('body').html();
 };
 
 const extractAuthor = ($) => {
   const bylineClass = '.paraStyle_byline';
   const bioClass = '.paraStyle_body_bio';
 
-  const name = ($(bylineClass).text() || '').trim().replace(/^by/i, '').trim();
+  const name = cleanTextValue($(bylineClass).text()).replace(/^by/i, '').trim();
 
   let image = null;
   let bio = '';
@@ -37,13 +55,13 @@ const extractAuthor = ($) => {
   return {
     name: name || null,
     image: image || null,
-    bio: bio || null,
+    bio: cleanBio(bio),
   };
 };
 
 module.exports = async (body) => {
   const html = stripWhitespace(body);
-  const $ = cheerio.load(html, { decodeEntities: false });
+  const $ = loadHTML(html);
 
   const deck = extractDeck($);
   const author = extractAuthor($);
@@ -56,11 +74,8 @@ module.exports = async (body) => {
   // Remove buyer's guide iframe search embeds.
   removeElements($, 'iframe[src*="pennnet.com"]');
 
-  // Remove class, id, and style attributes.
-  removeAttributes($, ['class', 'id', 'style']);
-
-  // Remove all data attributes.
-  removeDataAttributes($);
+  // Remove attributes.
+  removeAttrs($);
 
   return {
     extracted: {
