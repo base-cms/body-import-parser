@@ -2,4 +2,4 @@
 docker-compose run \
   --rm \
   yarn \
-  run test
+  run test $@
