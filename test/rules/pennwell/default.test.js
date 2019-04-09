@@ -58,8 +58,42 @@ describe('rules/pennwell/default', () => {
     const result = await rule(body);
     expect(result.html.cleaned).to.equal('<div><p>X > Y</p><p>&</p>%{[ data-embed-type="image" data-embed-id="5c9cebaedad15fb329dd7489" data-embed-element="span" data-embed-size="320w" contenteditable="false" data-embed-align="center" ]}%</div>');
   });
-  it('should adjust heading elements when an <h1> is present.');
-  it('should not adjust heading elements when an <h1> is not present.');
+  it('should adjust heading elements when an <h1> is present.', async () => {
+    const body = `
+      <div>
+        <h1>Foo</h1>
+        <h2>Bar</h2>
+        <h2>Bar</h2>
+        <div>
+          <h3>Foo</h3>
+          <h3>Foo</h3>
+          <h4>Foo</h4>
+          <h5>Foo</h5>
+          <h6>Foo</h6>
+        </div>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><h2>Foo</h2><h3>Bar</h3><h3>Bar</h3><div><h4>Foo</h4><h4>Foo</h4><h5>Foo</h5><h6>Foo</h6><h6>Foo</h6></div></div>');
+  });
+  it('should not adjust heading elements when an <h1> is not present.', async () => {
+    const body = `
+      <div>
+        <h2>Foo</h2>
+        <h2>Bar</h2>
+        <h2>Bar</h2>
+        <div>
+          <h3>Foo</h3>
+          <h3>Foo</h3>
+          <h4>Foo</h4>
+          <h5>Foo</h5>
+          <h6>Foo</h6>
+        </div>
+      </div>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div><h2>Foo</h2><h2>Bar</h2><h2>Bar</h2><div><h3>Foo</h3><h3>Foo</h3><h4>Foo</h4><h5>Foo</h5><h6>Foo</h6></div></div>');
+  });
   it('should remove `class` attributes.');
   it('should remove `style` attributes.');
   it('should remove `id` attributes.');
