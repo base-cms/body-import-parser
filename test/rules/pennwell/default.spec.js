@@ -36,6 +36,20 @@ describe('rules/pennwell/default', () => {
     const result = await rule(body);
     expect(result.html.cleaned).to.equal('<div></div><p>Foo</p>');
   });
+  it('should remove <style> elements.', async () => {
+    const body = `
+      <div>
+        <style>
+          body {
+            color: red;
+          }
+        </style>
+      </div>
+      <p>Foo</p>
+    `;
+    const result = await rule(body);
+    expect(result.html.cleaned).to.equal('<div></div><p>Foo</p>');
+  });
   it('should remove <iframe> elements with a src containing pennnet.com.', async () => {
     const body = `
       <div>

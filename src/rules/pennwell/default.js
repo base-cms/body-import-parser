@@ -69,7 +69,7 @@ module.exports = async (body) => {
   adjustHeadings($);
 
   // Remove form elements.
-  removeElements($, 'form');
+  removeElements($, 'form, style');
 
   // Remove buyer's guide iframe search embeds.
   removeElements($, 'iframe[src*="pennnet.com"]');
