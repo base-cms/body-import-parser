@@ -14,57 +14,57 @@ const removeAttrs = ($) => {
 
 const loadHTML = html => cheerio.load(html, { decodeEntities: false });
 
-const cleanTextValue = v => (v || '').replace(/\s+/g, ' ').trim();
+// const cleanTextValue = v => (v || '').replace(/\s+/g, ' ').trim();
 
-const extractDeck = ($) => {
-  const className = '.paraStyle_headline_deck';
-  const element = $(className);
-  if (!element.length) return null;
-  const deck = cleanTextValue(element.text()) || null;
-  element.replaceWith('');
-  return deck;
-};
+// const extractDeck = ($) => {
+//   const className = '.paraStyle_headline_deck';
+//   const element = $(className);
+//   if (!element.length) return null;
+//   const deck = cleanTextValue(element.text()) || null;
+//   element.replaceWith('');
+//   return deck;
+// };
 
-const cleanBio = (bio) => {
-  if (!bio) return null;
-  const $ = loadHTML(bio);
-  removeAttrs($);
-  return $('body').html();
-};
+// const cleanBio = (bio) => {
+//   if (!bio) return null;
+//   const $ = loadHTML(bio);
+//   removeAttrs($);
+//   return $('body').html();
+// };
 
-const extractAuthor = ($) => {
-  const bylineClass = '.paraStyle_byline';
-  const bioClass = '.paraStyle_body_bio';
+// const extractAuthor = ($) => {
+//   const bylineClass = '.paraStyle_byline';
+//   const bioClass = '.paraStyle_body_bio';
 
-  const name = cleanTextValue($(bylineClass).text()).replace(/^by/i, '').trim();
+//   const name = cleanTextValue($(bylineClass).text()).replace(/^by/i, '').trim();
 
-  let image = null;
-  let bio = '';
+//   let image = null;
+//   let bio = '';
 
-  $(bioClass).each(function () {
-    const imgElement = $(this).children('img');
-    if (imgElement.length) {
-      image = imgElement.attr('src');
-    } else {
-      bio = `${bio}<p>${$(this).html()}</p>`;
-    }
-  });
+//   $(bioClass).each(function () {
+//     const imgElement = $(this).children('img');
+//     if (imgElement.length) {
+//       image = imgElement.attr('src');
+//     } else {
+//       bio = `${bio}<p>${$(this).html()}</p>`;
+//     }
+//   });
 
-  $(bylineClass).replaceWith('');
-  $(bioClass).replaceWith('');
-  return {
-    name: name || null,
-    image: image || null,
-    bio: cleanBio(bio),
-  };
-};
+//   $(bylineClass).replaceWith('');
+//   $(bioClass).replaceWith('');
+//   return {
+//     name: name || null,
+//     image: image || null,
+//     bio: cleanBio(bio),
+//   };
+// };
 
 module.exports = async (body) => {
   const html = stripWhitespace(body);
   const $ = loadHTML(html);
 
-  const deck = extractDeck($);
-  const author = extractAuthor($);
+  // const deck = extractDeck($);
+  // const author = extractAuthor($);
 
   adjustHeadings($);
 
@@ -78,10 +78,7 @@ module.exports = async (body) => {
   removeAttrs($);
 
   return {
-    extracted: {
-      deck,
-      author,
-    },
+    extracted: {},
     html: {
       cleaned: $('body').html(),
       original: body,
