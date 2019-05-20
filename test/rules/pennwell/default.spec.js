@@ -23,7 +23,7 @@ describe('rules/pennwell/default', () => {
       <p>Hello, World</p>\t
     `;
     const result = await rule(body);
-    expect(result.html.cleaned).to.equal('<div><span>Bar</span><span>Foo Bar</span><span>Baz Bar</span></div><p>Hello, World</p>');
+    expect(result.html.cleaned).to.equal('<div><span>Bar </span><span>Foo Bar</span><span>Baz Bar</span></div><p>Hello, World</p>');
   });
   it('should remove <form> elements.', async () => {
     const body = `
